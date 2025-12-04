@@ -38,7 +38,7 @@ const createApp = (): Express => {
   app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
   // Health check endpoint (before rate limiting)
-  app.get('/health', (req, res) => {
+  app.get('/health', (_req, res) => {
     res.status(200).json({
       status: 'ok',
       timestamp: new Date().toISOString(),
@@ -52,7 +52,7 @@ const createApp = (): Express => {
   app.use('/api', routes);
 
   // 404 handler
-  app.use((req, res) => {
+  app.use((_req, res) => {
     res.status(404).json({
       success: false,
       error: {

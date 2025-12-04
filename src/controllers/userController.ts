@@ -6,8 +6,8 @@ import { PaginatedResponse } from '../types';
 export const userController = {
   getAll: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const page = (req.query.page as number) || 1;
-      const limit = (req.query.limit as number) || 10;
+      const page = req.query.page ? Number(req.query.page) : 1;
+      const limit = req.query.limit ? Number(req.query.limit) : 10;
 
       const result = await userService.getAll(page, limit);
 
